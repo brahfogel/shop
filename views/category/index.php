@@ -108,29 +108,30 @@ use yii\helpers\Html;
                 </div>
             </div>
 
-            <?php if( !empty($hits) ): ?>
+            <?php if( !empty($product_hits) ): ?>
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
 
                     <h2 class="title text-center">Features Items</h2>
 
-                    <?php if (!empty($hits)): ?>
-                        <?php $i = 0; $count = count($hits); ?>
-                        <?php foreach($hits as $hit): ?>
+                    <?php if (!empty($product_hits)): ?>
+                        <?php $i = 0; $count = count($product_hits); ?>
+                        <?php foreach($product_hits as $product): ?>
+                            <?php $mainImg = $product->getImage(); ?>
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <?= Html::img("@web/images/products/{$hit->img}", ['alt' => $hit->name]);?>
-                                            <h2>$<?= $hit->price?></h2>
-                                            <p><?= Html::a($hit->name, ['product/view', 'id' => $hit->id])?></p>
-                                            <a href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $hit->id])?>" data-id="<?= $hit->id?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <?= Html::img($mainImg->getUrl(), ['alt' => $product->name]);?>
+                                            <h2>$<?= $product->price?></h2>
+                                            <p><?= Html::a($product->name, ['product/view', 'id' => $product->id])?></p>
+                                            <a href="<?= \yii\helpers\Url::to(['cart/add', 'id' => $product->id])?>" data-id="<?= $product->id?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
 
-                                        <?php if($hit->new): ?>
+                                        <?php if($product->new): ?>
                                             <?= Html::img("@web/images/home/new.png", ['alt' => 'Новинка', 'class' => 'new']);?>
                                         <?php endif?>
-                                        <?php if($hit->sale): ?>
+                                        <?php if($product->sale): ?>
                                             <?= Html::img("@web/images/home/sale.png", ['alt' => 'Распродажа', 'class' => 'new']);?>
                                         <?php endif?>
                                     </div>

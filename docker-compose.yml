@@ -1,9 +1,43 @@
-version: '2'
+version: '3'
 services:
-  php:
-    image: yiisoftware/yii2-php:7.1-apache
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
-    ports:
-      - '8000:80'
+ webserver:
+  container_name: apache-php_shop
+  build:
+   context: ./
+   dockerfile: ./docker/Dockerfile
+  environment:
+   XDEBUG_CONFIG: remote_host=host.docker.internal
+   PHP_IDE_CONFIG: serverName=localhost
+  ports:
+  - 8098:80
+  volumes:
+  - ./:/var/www
+  links:
+  - db
+  depends_on:
+  - db
+ phpmyadmin:
+   container_name: phpmyadmin_shop
+   image: phpmyadmin/phpmyadmin
+   environment:
+    - PMA_ARBITRARY=1
+   restart: always
+   ports:
+    - 8080:80
+   links:
+     - db
+   volumes:
+    - /sessions
+ db:
+   container_name: mysql_shop
+   image: mysql:5.7
+   command: --default-authentication-plugin=mysql_native_password
+   restart: always
+   ports:
+     - 33061:3306
+   environment:
+     - MYSQL_ROOT_PASSWORD=root
+     - MYSQL_DATABASE=yii2shop
+   volumes:
+     - ./docker/database:/var/lib/mysql
+

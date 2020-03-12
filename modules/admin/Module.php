@@ -29,7 +29,8 @@ class Module extends \yii\base\Module
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['?'],
+//                        'roles' => ['@'],
                     ],
                 ],
             ],

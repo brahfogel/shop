@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-<!--    --><?//= $form->field($model, 'parent_id')->textInput(['maxlength' => true]) ?>
+<!--$form->field($model, 'parent_id')->textInput(['maxlength' => true])-->
 
-<!--    --><?//= $form->field($model, 'parent_id')->dropDownList(\yii\helpers\ArrayHelper::map(\app\modules\admin\models\Category::find()->all(), 'id', 'name')) ?>
+<!--$form->field($model, 'parent_id')->dropDownList(\yii\helpers\ArrayHelper::map(\app\modules\admin\models\Category::find()->all(), 'id', 'name'))-->
 
     <div class="form-group field-category-parent_id has-success">
         <label class="control-label" for="category-parent_id">Родительская категория</label>

@@ -14,7 +14,7 @@
 	$('#cart .modal-body').on('click', '.del-item', function () {
 		var id = $(this).data('id');
         $.ajax({
-            url: '//yii2-shop/web/cart/del-item',
+            url: '/cart/del-item',
             data: {id: id},
             type: 'GET',
             success: function(res) {
@@ -29,7 +29,7 @@
 
  	function getCart() {
         $.ajax({
-            url: '//yii2-shop/web/cart/show',
+            url: '/cart/show',
             type: 'GET',
             success: function(res) {
                 if(!res) alert('Ошибка!');
@@ -44,7 +44,7 @@
 
     function clearCart(){
 		$.ajax({
-			url: '//yii2-shop/web/cart/clear',
+			url: '/cart/clear',
 			type: 'GET',
 			success: function(res) {
 				if(!res) alert('Ошибка!');
